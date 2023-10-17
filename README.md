@@ -1,3 +1,5 @@
+This project called GuitarLA is a store build using Remix, React, VanillaCSS, Strapi and Cloudinary
+
 # Welcome to Remix!
 
 - [Remix Docs](https://remix.run/docs)
