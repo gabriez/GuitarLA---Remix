@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import {
     Meta, Links, Outlet, Scripts, LiveReload, useRouteError, isRouteErrorResponse, Link
 } from '@remix-run/react'
+
 import indexCSS from './styles/index.css';
 import Header from './components/header';
 import Footer from './components/footer';
@@ -61,9 +63,48 @@ function Document({children}) {
     )
 }
 export default function App () {
+    const cartLS = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cart')) ?? [] : null;
+    const [cartItems, setCartItems] = useState(cartLS);
+
+    useEffect(()=> {
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }, [cartItems])
+
+    const addCart = guitar => {
+        if (cartItems.some(item => item.id === guitar.id)) {
+            const newCart = cartItems.map(item => {
+                if (item.id === guitar.id) {
+                    item.quantity = guitar.quantity;
+                } 
+                return item;
+            });
+            setCartItems(newCart)
+        } else {
+            setCartItems([...cartItems, guitar]);
+        }
+
+    }
+
+    const updateQuantity = guitar => {
+        const newCart = cartItems.map(item => {
+            if (item.id === guitar.id) {
+                item.quantity = guitar.quantity;
+            } 
+            return item;
+        });
+        setCartItems(newCart)
+    }
+
+    const deleteProduct = id => {
+        const newCart = cartItems.filter(item => item.id !== id);
+        setCartItems(newCart)
+    }
+ 
     return (
         <Document>
-            <Outlet/>
+            <Outlet context={
+                {addCart, cartItems: cartItems, updateQuantity, deleteProduct}
+            }/>
         </Document>
     )
 }

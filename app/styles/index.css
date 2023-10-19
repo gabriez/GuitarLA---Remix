@@ -70,6 +70,7 @@
     display: flex;
     gap: 1.8rem;
     margin-top: 5rem;
+    justify-content: center;
   }
   
   @media screen and (min-width: 768px) {
@@ -77,7 +78,9 @@
             margin-top: 0;    
         }
     }
-
+  .header .navegacion img {
+    width: 2rem;
+  }
   
   .header .navegacion a { 
     color: var(--white);
@@ -136,6 +139,9 @@
     text-decoration: none;
     font-weight: 700;
   }
+  .footer .navegacion a:last-child{
+    display: none;
+  }
 
   .contenido .copyright{
     text-align: center;
@@ -155,3 +161,26 @@
     text-decoration: none;
     text-align: center;
   }
+
+
+
+
+  /* ENLACES  */
+   .enlace {
+    margin-top: 2rem;
+    display: block;
+    background-color: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+
+ .enlace:hover {
+    background-color: var(--primary);
+}
