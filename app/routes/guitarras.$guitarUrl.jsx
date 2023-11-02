@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useLoaderData, useOutletContext} from "@remix-run/react"
-
+import { Link, useLoaderData, useOutletContext} from "@remix-run/react"
 import { getGuitar } from "../models/guitars.server";
 import guitarraCSS from '../styles/guitarra.css'
 
@@ -33,7 +32,7 @@ export function meta ({data}){
     ]
   }
 
-  const {name} = data;
+  const {name} = data.attributes;
   return [
     {title: `GuitarLA - ${name}`},
     {description: `Guitarras, venta de guitarras, guitarra ${name}`}
@@ -48,7 +47,6 @@ const GuitarDynamic = () => {
     const {name, description, image, price} = guitarData.attributes;
     const imageDestructured = image.data.attributes.url; 
     const handleSubmit = e => {
-      e.preventDefault();
 
       if(quantity < 1) {
         alert('Debes seleccionar una cantidad');
@@ -70,9 +68,9 @@ const GuitarDynamic = () => {
         <img src={imageDestructured} alt={`Imagen de la guitarra ${name}`} className="imagen" />
         <div className="contenido">
           <h3>{name}</h3>
-          <p className="texto"> ${description} </p>
+          <p className="texto"> {description} </p>
           <p className="price"> ${price} </p>
-          <form onSubmit={handleSubmit} className="formulario">
+          <form className="formulario">
             <label htmlFor="cantidad">Cantidad</label>
             <select 
             onChange={e => {
@@ -88,7 +86,7 @@ const GuitarDynamic = () => {
               <option value="5">5</option>
             </select>
 
-            <input value='Agregar al carrito' type="submit"/>
+            <Link to='/cart' onClick={handleSubmit} className="submit"> Agregar al carrito</Link>
           </form>
         </div>
       </main>

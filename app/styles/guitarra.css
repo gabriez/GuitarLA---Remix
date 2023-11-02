@@ -66,18 +66,21 @@
     border-radius: 1rem;
 }
 
-.formulario input[type="submit"] {
+.formulario .submit {
     margin-top: 3rem;
     padding: 1.4rem;
     background-color: var(--black);
     color: var(--white);
     text-transform: uppercase;
     border: none;
+    text-decoration: none;
     font-weight: 700;
     transition: background-color 250ms;
+    display: block;
+    text-align: center;
 }
 
-.formulario input[type="submit"]:hover{
+.formulario .submit:hover{
     cursor: pointer;
     background-color: var(--primary);
 }
